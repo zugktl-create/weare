@@ -2990,3 +2990,15 @@ if state.autoPlantCarrot then
 	resetPlantSetup()
 	startPlantCarrot()
 end
+
+task.spawn(function()
+    local vim = game:GetService("VirtualInputManager")
+
+    task.wait(3) -- tunggu UI muncul
+
+    pcall(function()
+        -- 1x klik di tengah layar
+        vim:SendTouchEvent(0, Enum.UserInputState.Begin.Value, 500, 300)
+        vim:SendTouchEvent(0, Enum.UserInputState.End.Value, 500, 300)
+    end)
+end)
