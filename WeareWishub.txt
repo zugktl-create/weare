@@ -2994,11 +2994,17 @@ end
 task.spawn(function()
     local vim = game:GetService("VirtualInputManager")
 
-    task.wait(3) -- tunggu UI muncul
+    task.wait(3)
+
+    local camera = workspace.CurrentCamera
+    local viewport = camera.ViewportSize
+
+    local x = math.floor(viewport.X / 2)
+    local y = math.floor(viewport.Y / 2)
 
     pcall(function()
-        -- 1x klik di tengah layar
-        vim:SendTouchEvent(0, Enum.UserInputState.Begin.Value, 500, 300)
-        vim:SendTouchEvent(0, Enum.UserInputState.End.Value, 500, 300)
+        vim:SendTouchEvent(0, Enum.UserInputState.Begin.Value, x, y)
+        task.wait(0.05)
+        vim:SendTouchEvent(0, Enum.UserInputState.End.Value, x, y)
     end)
 end)
